@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  species: MyString
+  description: MyText
+  fur_type: MyString
+  age: MyString
+  sex: MyString
+  image_url: MyString
+  district: MyString
+  adopted_status: false
+
+two:
+  user: two
+  name: MyString
+  species: MyString
+  description: MyText
+  fur_type: MyString
+  age: MyString
+  sex: MyString
+  image_url: MyString
+  district: MyString
+  adopted_status: false
