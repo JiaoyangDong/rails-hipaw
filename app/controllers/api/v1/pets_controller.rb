@@ -9,7 +9,7 @@ class Api::V1::PetsController < ApplicationController
     if @pet.save
       render :show, status: :created
     else
-      render error
+      render_error
     end
   end
 
