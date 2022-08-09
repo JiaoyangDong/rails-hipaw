@@ -7,7 +7,7 @@ class CreatePets < ActiveRecord::Migration[7.0]
       t.text :description, presence: true, length: { in: 20..200 }
       t.string :fur_type, inclusion: { in: %w[long short hairless] }
       t.string :age
-      t.string :sex, presence: true, inclusion: { in: %w[male female unspecified]}
+      t.string :sex, presence: true, inclusion: { in: %w[male female unspecified] }
       t.string :image_url, presence: true
       t.string :district, presence: true, inclusion: { in: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming]}
       t.boolean :adopted_status, default: false

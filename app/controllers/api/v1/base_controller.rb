@@ -12,6 +12,8 @@ class Api::V1::BaseController < ActionController::Base
     token = find_jwt_token
     if token.present?
       data = jwt_decode(token)
+
+      puts "data #{data}"
       user_id = data[:user_id]
       @current_user = User.find(user_id) # set current user by user_id in JWT payload
     else
