@@ -29,7 +29,7 @@ FUR = %w[long short hairless]
       age: "#{(1..20).to_a.sample} #{%w[months years].sample}",
       sex: %w[male female unspecified].sample,
       image_url: dogs[n]["urls"]["small"],
-      district: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming].sample
+      district: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming].sample.capitalize
     )
       p "Add new pet: #{pet.name}"
     end
