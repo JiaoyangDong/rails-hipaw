@@ -7,8 +7,10 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # require 'open-uri'
-url="https://api.unsplash.com/search/photos?page=1&query=dog&client_id=Cu-bOxmHNpsY4DftpFskX6nkbRH6JUnUoR9QbYHN2-g"
-dogs = JSON.parse(URI.open(url).read )["results"].first(10)
+dog_url="https://api.unsplash.com/search/photos?page=1&query=dog&client_id=Cu-bOxmHNpsY4DftpFskX6nkbRH6JUnUoR9QbYHN2-g"
+dogs = JSON.parse(URI.open(dog_url).read )["results"].first(10)
+cat_url="https://api.unsplash.com/search/photos?page=1&query=cat&client_id=Cu-bOxmHNpsY4DftpFskX6nkbRH6JUnUoR9QbYHN2-g"
+cats = JSON.parse(URI.open(cat_url).read )["results"].first(10)
 
 Booking.destroy_all
 User.destroy_all
@@ -17,7 +19,7 @@ Pet.destroy_all
 PERSONALITY = %w[friendly happy mean active chill lazy]
 FUR = %w[long short hairless]
 
-6.times do |n|
+10.times do |n|
   if user = User.create(wechat_info: Faker::GreekPhilosophers.name)
     p "Add new user: #{user.wechat_info}"
     if pet = Pet.create(
@@ -33,11 +35,24 @@ FUR = %w[long short hairless]
     )
       p "Add new pet: #{pet.name}"
     end
+    if pet = Pet.create(
+      user: user,
+      name: Faker::Creature::Cat.name,
+      species: "cat",
+      description: "#{PERSONALITY.sample} kitten to be adopted!",
+      fur_type: FUR.sample,
+      age: "#{(1..20).to_a.sample} #{%w[months years].sample}",
+      sex: %w[male female unspecified].sample,
+      image_url: cats[n]["urls"]["small"],
+      district: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming].sample.capitalize
+    )
+      p "Add new pet: #{pet.name}"
+    end
   end
   # user.pets
 end
 
-3.times do
+5.times do
   if b = Booking.create(user: User.all.sample, pet: Pet.all.sample, date_and_time: Date.today)
     p "add new booking."
   else
