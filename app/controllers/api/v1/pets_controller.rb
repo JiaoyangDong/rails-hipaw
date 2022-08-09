@@ -1,4 +1,4 @@
-class Api::V1::PetsController < ApplicationController
+class Api::V1::PetsController < Api::V1::BaseController
   def index
     @pets = Pet.all
     render json: @pets
@@ -6,9 +6,8 @@ class Api::V1::PetsController < ApplicationController
 
   def create
     @pet = Pet.new(pet_params)
-    if @pet.save
-      render :show, status: :created
-    else
+    @pet.user = @current_user
+    unless @pet.save
       render_error
     end
   end
@@ -16,7 +15,7 @@ class Api::V1::PetsController < ApplicationController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :age, :species, :description, :sex, :fur_type, :image_url)
+    params.require(:pet).permit(:name, :age, :species, :description, :sex, :fur_type, :image_url, :district)
   end
 
   def render_error
