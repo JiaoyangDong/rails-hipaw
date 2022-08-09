@@ -5,6 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# require 'open-uri'
+url="https://api.unsplash.com/search/photos?page=1&query=dog&client_id=Cu-bOxmHNpsY4DftpFskX6nkbRH6JUnUoR9QbYHN2-g"
+dogs = JSON.parse(URI.open(url).read )["results"].first(10)
+
 Booking.destroy_all
 User.destroy_all
 Pet.destroy_all
@@ -12,7 +17,7 @@ Pet.destroy_all
 PERSONALITY = %w[friendly happy mean active chill lazy]
 FUR = %w[long short hairless]
 
-6.times do
+6.times do |n|
   if user = User.create(wechat_info: Faker::GreekPhilosophers.name)
     p "Add new user: #{user.wechat_info}"
     if pet = Pet.create(
@@ -23,7 +28,7 @@ FUR = %w[long short hairless]
       fur_type: FUR.sample,
       age: "#{(1..20).to_a.sample} #{%w[months years].sample}",
       sex: %w[male female unspecified].sample,
-      image_url: Faker::Internet.url,
+      image_url: dogs[n]["urls"]["small"],
       district: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming].sample
     )
       p "Add new pet: #{pet.name}"
