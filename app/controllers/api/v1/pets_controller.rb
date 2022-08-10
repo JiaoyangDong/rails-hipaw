@@ -5,7 +5,6 @@ class Api::V1::PetsController < Api::V1::BaseController
   end
 
   def show
-    # @pet = Pet.new
     @pet = Pet.find(params[:id])
     render json: @pet
   end
