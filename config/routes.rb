@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :pets, only: [:show, :index, :create] do
+      resources :pets, only: [:show, :index, :create, :update, :destroy] do
         # resources :bookings, only: [:index, :create]
       end
       post 'login', to: 'users#login', as: :login
