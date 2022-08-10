@@ -4,6 +4,12 @@ class Api::V1::PetsController < Api::V1::BaseController
     render json: @pets
   end
 
+  def show
+    # @pet = Pet.new
+    @pet = Pet.find(params[:id])
+    render json: @pet
+  end
+
   def create
     @pet = Pet.new(pet_params)
     @pet.user = @current_user
