@@ -1,6 +1,12 @@
 class Api::V1::UsersController < Api::V1::BaseController
   skip_before_action :verify_request, only: [:login]
 
+  def profile_page
+    # @current_user
+    @my_pets = @current_user.pets
+    @booked_pets = @current_user.booked_pets
+  end
+
   def login
     code = params[:code]
     p code
