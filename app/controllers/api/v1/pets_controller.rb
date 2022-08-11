@@ -17,6 +17,28 @@ class Api::V1::PetsController < Api::V1::BaseController
     end
   end
 
+  def edit
+    @pet = Pet.find(params[:id])
+    render json: @pet
+  end
+
+  def update
+    @pet = Pet.find(params[:id])
+    if @pet.update(pet_params)
+      # render json: @pet
+      render :show
+    else
+      render_error
+    end
+  end
+
+  def destroy
+    @pet = Pet.find(params[:id])
+    @pet.destroy
+    render json: { msg: 'Deleted' }
+  end
+
+
   private
 
   def pet_params
