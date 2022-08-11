@@ -12,6 +12,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
       render json: {booking: @booking, pet: @booking.pet}, status: :created
       # send back: 0. bookng complete info 1.user id 2. pet complete info
     else
+      @ori_booking = Booking.find_by(pet: @booking.pet, user:@booking.user)
       render_error
     end
   end
@@ -23,7 +24,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @booking.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @booking.errors.full_messages, booking: @ori_booking }, status: :unprocessable_entity
   end
 
 end
