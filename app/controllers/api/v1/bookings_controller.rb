@@ -1,11 +1,16 @@
 class Api::V1::BookingsController < Api::V1::BaseController
+  def show
+    @booking = Booking.find(params[:id])
+    render json: {booking: @booking, pet: @booking.pet}
+  end
+
   def create
     @booking = Booking.new(booking_params)
     @booking.pet = Pet.find(params[:pet_id])
     @booking.user = @current_user
-    # @booking.user = @current_user
     if @booking.save
-      render json: {booking: @booking}
+      render json: {booking: @booking, pet: @booking.pet}, status: :created
+      # send back: 0. bookng complete info 1.user id 2. pet complete info
     else
       render_error
     end
@@ -13,7 +18,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
 
   private
 
-  def pet_params
+  def booking_params
     params.require(:booking).permit(:user, :pet, :date_and_time)
   end
 

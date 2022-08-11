@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :pets, only: [:show, :index, :create, :update, :destroy] do
-        resources :bookings, only: [:create]
+        resources :bookings, only: [:show, :create]
       end
       post 'login', to: 'users#login', as: :login
       get 'profile/:id', to: 'users#profile_page'
