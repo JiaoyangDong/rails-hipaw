@@ -1,3 +1,7 @@
 json.user @current_user
-json.pets @my_pets
-json.booked_pets @booked_pets
+json.pets do
+  json.partial! partial: 'api/v1/users/pet', collection: @my_pets, as: :pet
+end
+json.booked_pets do
+  json.partial! partial: 'api/v1/users/pet', collection: @booked_pets, as: :pet
+end

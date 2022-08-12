@@ -1,13 +1,45 @@
 class Api::V1::PetsController < Api::V1::BaseController
   def index
-    @pets = Pet.all
+    if params["filter"].nil?
+      @pets = Pet.all
+    else
+      # Pet.where()
+      sql_query = []
+      %w[species sex district].each do  |filter|
+        p "now on #{filter}"
+        unless params[filter] == "all"
+          if filter == "species"
+            if params[filter] == "other"
+              sql_query << "species NOT IN ('dog', 'cat')"
+            else
+              sql_query << "species = :species"
+            end
+          elsif filter == "sex"
+            sql_query << "sex = :sex"
+          elsif filter == "district"
+            sql_query << "district = :district"
+          end
+        end
+        # p sql_query.join(" AND ")
+      end
+      if sql_query.length == 0
+        @pets = Pet.all
+      else
+        p "==========sql query: #{sql_query.join(" AND ")}"
+        @pets = Pet.where(sql_query.join(" AND "),
+          species: params["species"],
+          sex: params["sex"],
+          district: params["district"])
+      end
+    end
+    p @pets.length
     # render json: @pets
-
   end
 
   def show
     @pet = Pet.find(params[:id])
-    # render json: @pet
+    @my_booking = @pet.bookings.find_by(user: @current_user)
+    # render json: {pet: @pet, my_booking: @my_booking}
   end
 
   def create
