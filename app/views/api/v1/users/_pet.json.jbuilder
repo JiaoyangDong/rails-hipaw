@@ -1,2 +1,2 @@
-json.extract! pet, :name, :sex, :image_url
-json.created_at pet.created_at&.strftime("%B %e %Y")
+json.extract! pet, :id, :name, :sex, :image_url
+json.created_at pet.created_at&.strftime("%b %e %Y")
