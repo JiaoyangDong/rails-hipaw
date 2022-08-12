@@ -10,7 +10,7 @@ class Api::V1::PetsController < Api::V1::BaseController
         unless params[filter] == "all"
           if filter == "species"
             if params[filter] == "other"
-              sql_query << "species NOT IN (dog, cat)"
+              sql_query << "species NOT IN ('dog', 'cat')"
             else
               sql_query << "species = :species"
             end
@@ -22,11 +22,15 @@ class Api::V1::PetsController < Api::V1::BaseController
         end
         # p sql_query.join(" AND ")
       end
-      p "==========sql query: #{sql_query.join(" AND ")}"
-      @pets = Pet.where(sql_query.join(" AND "),
-        species: params["species"],
-        sex: params["sex"],
-        district: params["district"])
+      if sql_query.length == 0
+        @pets = Pet.all
+      else
+        p "==========sql query: #{sql_query.join(" AND ")}"
+        @pets = Pet.where(sql_query.join(" AND "),
+          species: params["species"],
+          sex: params["sex"],
+          district: params["district"])
+      end
     end
     p @pets.length
     render json: @pets
