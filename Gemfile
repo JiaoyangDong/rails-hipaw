@@ -77,3 +77,7 @@ gem 'jwt'
 gem 'rest-client'
 
 gem 'open-uri'
+
+gem 'cloudinary'
+
+gem "dotenv-rails", groups: [:development, :test]
