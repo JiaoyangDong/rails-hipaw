@@ -6,7 +6,8 @@ class Api::V1::PetsController < Api::V1::BaseController
 
   def show
     @pet = Pet.find(params[:id])
-    render json: @pet
+    @my_booking = @pet.bookings.find_by(user_id: @current_user)
+    render json: {pet: @pet, my_booking: @my_booking}
   end
 
   def create
