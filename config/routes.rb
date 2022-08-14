@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :pets, only: [:show, :index, :create, :update, :destroy] do
+        member do
+          post 'upload'
+        end
         resources :bookings, only: [:create]
       end
       post 'login', to: 'users#login', as: :login
