@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_12_034747) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_104407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,9 +62,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_034747) do
     t.string "sex"
     t.string "image_url"
     t.string "district"
-    t.boolean "adopted_status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "neutered"
+    t.string "vaccination"
+    t.string "special_need"
+    t.string "breed"
+    t.string "character"
+    t.string "adoption_status"
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
