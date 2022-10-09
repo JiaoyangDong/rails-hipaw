@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_12_034747) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_044102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_034747) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "application_date"
+    t.string "application_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "pet_id", null: false
@@ -53,19 +62,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_034747) do
   end
 
   create_table "pets", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "name"
     t.string "species"
-    t.text "description"
-    t.string "fur_type"
     t.string "age"
-    t.string "sex"
+    t.string "gender"
     t.string "image_url"
-    t.string "district"
-    t.boolean "adopted_status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_pets_on_user_id"
+    t.boolean "neutered"
+    t.string "vaccination"
+    t.string "special_need"
+    t.string "breed"
+    t.string "character"
+    t.string "adoption_status"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,11 +82,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_034747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "open_id"
+    t.string "role"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "applications", "users"
   add_foreign_key "bookings", "pets"
   add_foreign_key "bookings", "users"
-  add_foreign_key "pets", "users"
 end
