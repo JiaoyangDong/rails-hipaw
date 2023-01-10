@@ -40,6 +40,7 @@ class Api::V1::PetsController < Api::V1::BaseController
     @pet = Pet.find(params[:id])
     @my_booking = @pet.bookings.find_by(user: @current_user)
     # render json: {pet: @pet, my_booking: @my_booking}
+    render json: {pet: @pet}
   end
 
   def create
@@ -84,7 +85,7 @@ class Api::V1::PetsController < Api::V1::BaseController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :age, :species, :description, :sex, :fur_type, :district, :image)
+    params.require(:pet).permit(:name, :age, :species, :gender, :image_url)
   end
 
   def render_error
