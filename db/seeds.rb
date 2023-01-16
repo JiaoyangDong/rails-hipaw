@@ -13,7 +13,7 @@ cat_url="https://api.unsplash.com/search/photos?page=1&query=cat&client_id=Cu-bO
 cats = JSON.parse(URI.open(cat_url).read )["results"].first(10)
 
 Booking.destroy_all
-# User.destroy_all
+User.destroy_all
 Pet.destroy_all
 
 PERSONALITY = %w[friendly happy mean active chill lazy]
@@ -56,10 +56,10 @@ PERSONALITY = %w[friendly happy mean active chill lazy]
   # user.pets
 end
 
-# 5.times do
-#   if b = Booking.create(user: User.all.sample, pet: Pet.all.sample, date_and_time: Date.today)
-#     p "add new booking."
-#   else
-#     p "fail to add new booking"
-#   end
-# end
+5.times do
+  if b = Booking.create(user: User.all.sample, pet: Pet.all.sample, date_and_time: Date.today)
+    p "add new booking."
+  else
+    p "fail to add new booking"
+  end
+end
