@@ -17,38 +17,42 @@ User.destroy_all
 Pet.destroy_all
 
 PERSONALITY = %w[friendly happy mean active chill lazy]
-FUR = %w[long short hairless]
 
 10.times do |n|
-  if user = User.create(wechat_info: Faker::GreekPhilosophers.name)
-    p "Add new user: #{user.wechat_info}"
+  # if user = User.create(wechat_info: Faker::GreekPhilosophers.name)
+    # p "Add new user: #{user.wechat_info}"
     if pet = Pet.create(
-      user: user,
+      # user: user,
       name: Faker::Creature::Dog.name,
       species: "dog",
-      description: "#{PERSONALITY.sample} doggy to be adopted!",
-      fur_type: FUR.sample,
       age: "#{(1..20).to_a.sample} #{%w[months years].sample}",
-      sex: %w[male female unspecified].sample,
+      gender: %w[male female].sample,
       image_url: dogs[n]["urls"]["small"],
-      district: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming].sample.capitalize
+      neutered: [true, false].sample,
+      vaccination: [true, false].sample,
+      special_need: [true, false].sample,
+      size: %w[mini small medium large].sample.capitalize,
+      character: PERSONALITY.sample,
+      adoption_status: %w[available adopted].sample
     )
       p "Add new pet: #{pet.name}"
     end
     if pet = Pet.create(
-      user: user,
+      # user: user,
       name: Faker::Creature::Cat.name,
       species: "cat",
-      description: "#{PERSONALITY.sample} kitten to be adopted!",
-      fur_type: FUR.sample,
       age: "#{(1..20).to_a.sample} #{%w[months years].sample}",
-      sex: %w[male female unspecified].sample,
+      gender: %w[male female].sample,
       image_url: cats[n]["urls"]["small"],
-      district: %w[huangpu xuhui changning jingan putuo hongkou yangpu baoshan minhang jiading pudong songjiang jinshan qingpu fengxian chongming].sample.capitalize
+      neutered: [true, false].sample,
+      vaccination: [true, false].sample,
+      special_need: [true, false].sample,
+      size: %w[mini small medium large].sample.capitalize,
+      character: PERSONALITY.sample,
+      adoption_status: %w[available adopted].sample    
     )
       p "Add new pet: #{pet.name}"
     end
-  end
   # user.pets
 end
 

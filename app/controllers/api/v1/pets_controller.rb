@@ -5,7 +5,7 @@ class Api::V1::PetsController < Api::V1::BaseController
     else
       # Pet.where()
       sql_query = []
-      %w[species sex district].each do  |filter|
+      %w[species gender size].each do  |filter|
         p "now on #{filter}"
         unless params[filter] == "all"
           if filter == "species"
@@ -14,10 +14,10 @@ class Api::V1::PetsController < Api::V1::BaseController
             else
               sql_query << "species = :species"
             end
-          elsif filter == "sex"
-            sql_query << "sex = :sex"
-          elsif filter == "district"
-            sql_query << "district = :district"
+          elsif filter == "gender"
+            sql_query << "gender = :gender"
+          elsif filter == "size"
+            sql_query << "size = :size"
           end
         end
         # p sql_query.join(" AND ")
@@ -28,8 +28,8 @@ class Api::V1::PetsController < Api::V1::BaseController
         p "==========sql query: #{sql_query.join(" AND ")}"
         @pets = Pet.where(sql_query.join(" AND "),
           species: params["species"],
-          sex: params["sex"],
-          district: params["district"])
+          gender: params["gender"],
+          size: params["size"])
       end
     end
     p @pets.length
@@ -45,7 +45,7 @@ class Api::V1::PetsController < Api::V1::BaseController
 
   def create
     @pet = Pet.new(pet_params)
-    @pet.user = @current_user
+    # @pet.user = @current_user
     if @pet.save
       render json: {pet: @pet}
       #render :show #, status: :created
@@ -85,7 +85,7 @@ class Api::V1::PetsController < Api::V1::BaseController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :age, :species, :gender, :image_url)
+    params.require(:pet).permit(:name, :species, :age, :gender, :image_url, :neutered, :vaccination, :special_need, :size)
   end
 
   def render_error
