@@ -29,11 +29,11 @@ PERSONALITY = %w[friendly happy mean active chill lazy]
       gender: %w[male female].sample,
       image_url: dogs[n]["urls"]["small"],
       neutered: [true, false].sample,
-      vaccination: [true, false].sample,
+      vaccinated: [true, false].sample,
       special_need: [true, false].sample,
-      size: %w[mini small medium large].sample.capitalize,
+      size: %w[mini small medium large].sample,
       description: PERSONALITY.sample,
-      adoption_status: %w[available adopted].sample
+      adoptable: true
     )
       p "Add new pet: #{pet.name}"
     end
@@ -45,11 +45,11 @@ PERSONALITY = %w[friendly happy mean active chill lazy]
       gender: %w[male female].sample,
       image_url: cats[n]["urls"]["small"],
       neutered: [true, false].sample,
-      vaccination: [true, false].sample,
+      vaccinated: [true, false].sample,
       special_need: [true, false].sample,
-      size: %w[mini small medium large].sample.capitalize,
+      size: %w[mini small medium large].sample,
       description: PERSONALITY.sample,
-      adoption_status: %w[available adopted].sample    
+      adoptable: true
     )
       p "Add new pet: #{pet.name}"
     end
