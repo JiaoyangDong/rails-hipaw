@@ -38,7 +38,7 @@ class Api::V1::PetsController < Api::V1::BaseController
 
   def show
     @pet = Pet.find(params[:id])
-    @my_booking = @pet.bookings.find_by(user: @current_user)
+    # @my_booking = @pet.bookings.find_by(user: @current_user)
     # render json: {pet: @pet, my_booking: @my_booking}
     render json: {pet: @pet}
   end
@@ -64,7 +64,6 @@ class Api::V1::PetsController < Api::V1::BaseController
     if @pet.update(pet_params)
       # render json: @pet
       render :show
-    else
       render_error
     end
   end
@@ -79,13 +78,13 @@ class Api::V1::PetsController < Api::V1::BaseController
     @pet = Pet.find(params[:id])
     puts "params #{params}"
     @pet.image.attach(params[:image])
-    render json: {msg: 'success'}
+    render json: {msg: 'IMG UPLOADED'}
   end
 
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :species, :age, :gender, :image, :neutered, :vaccination, :special_need, :size)
+    params.require(:pet).permit(:name, :species, :age, :gender, :neutered, :vaccination, :special_need, :size, :description)
   end
 
   def render_error

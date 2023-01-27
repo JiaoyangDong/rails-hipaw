@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_26_080930) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_26_123249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,14 +66,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_080930) do
     t.string "species"
     t.string "age"
     t.string "gender"
-    t.string "image"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "neutered"
     t.string "vaccination"
     t.string "special_need"
     t.string "size"
-    t.string "character"
+    t.string "description"
     t.string "adoption_status"
   end
 
