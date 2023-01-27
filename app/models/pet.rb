@@ -5,7 +5,7 @@ class Pet < ApplicationRecord
   validates :size, inclusion: { in: %w(mini small medium large), message: " valid sizes are mini, small, medium, or large" }
   validates :gender, inclusion: { in: %w(male female) }
   validates :neutered, inclusion: [true, false]
-  validates :vaccination, inclusion: [true, false]
+  validates :vaccinated, inclusion: [true, false]
   validates :special_need, inclusion: [true, false]
   validates :description, length: { maximum: 300 }
   validates :adoption_status, inclusion: [true, false]
