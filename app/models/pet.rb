@@ -8,7 +8,7 @@ class Pet < ApplicationRecord
   validates :vaccinated, inclusion: [true, false]
   validates :special_need, inclusion: [true, false]
   validates :description, length: { maximum: 300 }
-  validates :adoption_status, inclusion: [true, false]
+  validates :adoptable, inclusion: [true, false]
 
   has_many :bookings
 
