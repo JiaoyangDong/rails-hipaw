@@ -1,4 +1,4 @@
-json.extract! pet, :id, :name, :species, :age, :gender, :image_url, :neutered, :vaccination, :special_need, :size, :description, :adoption_status
+json.extract! pet, :id, :name, :species, :age, :gender, :image_url, :neutered, :vaccinated, :special_need, :size, :description, :adoptable
 if pet.image.attached? 
   json.image_url pet.image.url
 end
