@@ -80,6 +80,7 @@ gem 'rest-client'
 
 gem 'open-uri'
 
-gem 'cloudinary'
+# gem 'cloudinary'
+gem "activestorage-aliyun"
 
 gem "dotenv-rails", groups: [:development, :test]
