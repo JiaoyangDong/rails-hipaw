@@ -10,15 +10,15 @@ class PetPolicy < ApplicationPolicy
     end
 
     def create?
-      true
+      user.admin?
     end
 
     def update?
-      record.user == admin
+      user.admin?
     end
 
     def destroy?
-      record.user == admin
+      user.admin?
     end
 
   end

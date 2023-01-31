@@ -46,9 +46,9 @@ class Api::V1::PetsController < Api::V1::BaseController
   end
 
   def create
-    authorize @pet
     @pet = Pet.new(pet_params)
-    @pet.user = current_user
+    authorize @pet
+    # @pet.user = current_user
     if @pet.save
       render json: {pet: @pet}
       #render :show #, status: :created
