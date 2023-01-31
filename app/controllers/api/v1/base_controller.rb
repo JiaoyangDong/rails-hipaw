@@ -1,8 +1,11 @@
 class Api::V1::BaseController < ActionController::Base
+  include Pundit::Authorization
   HMAC_SECRET = Rails.application.credentials.dig(:jwt, :hmac_secret) # find the secret
 
   skip_before_action :verify_authenticity_token
   before_action :verify_request
+  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   rescue_from JWT::ExpiredSignature, with: :render_unauthorized
 
@@ -32,5 +35,9 @@ class Api::V1::BaseController < ActionController::Base
 
   def render_unauthorized
     render json: { error: 'token expired' }, status: 401
+  end
+
+  def skip_pundit?
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end

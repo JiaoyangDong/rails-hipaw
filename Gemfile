@@ -83,4 +83,6 @@ gem 'open-uri'
 # gem 'cloudinary'
 gem "activestorage-aliyun"
 
+gem 'pundit'
+
 gem "dotenv-rails", groups: [:development, :test]

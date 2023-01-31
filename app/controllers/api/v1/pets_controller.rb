@@ -1,5 +1,6 @@
 class Api::V1::PetsController < Api::V1::BaseController
   def index
+   @pets = policy_scope(Pet)
     if params["filter"].nil?
       @pets = Pet.all
     else
@@ -37,6 +38,7 @@ class Api::V1::PetsController < Api::V1::BaseController
   end
 
   def show
+    authorize @pet
     @pet = Pet.find(params[:id])
     # @my_booking = @pet.bookings.find_by(user: @current_user)
     # render json: {pet: @pet, my_booking: @my_booking}
@@ -45,7 +47,8 @@ class Api::V1::PetsController < Api::V1::BaseController
 
   def create
     @pet = Pet.new(pet_params)
-    # @pet.user = @current_user
+    authorize @pet
+    # @pet.user = current_user
     if @pet.save
       render json: {pet: @pet}
       #render :show #, status: :created
@@ -55,11 +58,13 @@ class Api::V1::PetsController < Api::V1::BaseController
   end
 
   def edit
+    authorize @pet
     @pet = Pet.find(params[:id])
     render json: @pet
   end
 
   def update
+    authorize @pet
     @pet = Pet.find(params[:id])
     if @pet.update(pet_params)
       # render json: @pet
@@ -69,6 +74,7 @@ class Api::V1::PetsController < Api::V1::BaseController
   end
 
   def destroy
+    authorize @pet
     @pet = Pet.find(params[:id])
     @pet.destroy
     render json: { msg: 'Deleted' }
