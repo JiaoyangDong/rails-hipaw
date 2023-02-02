@@ -20,5 +20,3 @@ module RailsHipaw
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
-
-ENV['RAILS_MASTER_KEY'] = '/config/master.key'
