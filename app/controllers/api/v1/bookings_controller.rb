@@ -20,7 +20,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:user, :pet, :date_and_time)
+    params.require(:booking).permit(:user, :pet, :credted_at)
   end
 
   def render_error
