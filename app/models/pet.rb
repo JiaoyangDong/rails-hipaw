@@ -10,7 +10,7 @@ class Pet < ApplicationRecord
   validates :description, length: { maximum: 300 }
   validates :adoptable, inclusion: [true, false]
 
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
 
   has_one_attached :image
 end

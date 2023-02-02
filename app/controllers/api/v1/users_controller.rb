@@ -8,9 +8,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def admin_page
-    @pets = Pet.all
-    @users = User.all
-    @bookings = Booking.all
+    @bookings = Booking.includes(:user, :pet).all
   end
 
 
