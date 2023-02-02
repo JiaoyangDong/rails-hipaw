@@ -25,3 +25,6 @@ ENV RACK_ENV production
 
 # Execute the Procfile
 CMD ["bin/run-dev.sh"]
+
+ENV PATH /usr/local/bin:$PATH
+CMD bundle exec rake
