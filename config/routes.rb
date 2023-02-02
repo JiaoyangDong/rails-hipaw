@@ -12,7 +12,8 @@ Rails.application.routes.draw do
         resources :bookings, only: [:create]
       end
       post 'login', to: 'users#login', as: :login
-      get 'profile/:id', to: 'users#profile_page'
+      get 'users/:id', to: 'users#profile_page'
+      get 'admins/:id', to: 'admins#profile_page'
       resources :bookings, only: [:show]
       # get "about", to: "pages#about", as: 'newprefix'
     end
