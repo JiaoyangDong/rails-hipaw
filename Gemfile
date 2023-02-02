@@ -1,6 +1,8 @@
 #source "https://rubygems.org"
 source 'https://gems.ruby-china.com/'
 
+gem "bundler", "~> 2.3.0"
+
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
