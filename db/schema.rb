@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_050139) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "open_id"
-    t.boolean "admin"
+    t.string "role"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
