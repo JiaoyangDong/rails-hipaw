@@ -1,5 +1,5 @@
 {
-  "name": "eleventh-hour",
+  "name": "ehr",
   "scripts": {
     "dokku": {
       "predeploy": "bundle exec rake assets:precompile",
