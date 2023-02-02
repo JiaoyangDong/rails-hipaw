@@ -7,6 +7,13 @@ class Api::V1::UsersController < Api::V1::BaseController
     @booked_pets = @current_user.booked_pets
   end
 
+  def admin_page
+    @pets = Pet.all
+    @users = User.all
+    @bookings = Booking.all
+  end
+
+
   def login
     code = params[:code]
     p code
