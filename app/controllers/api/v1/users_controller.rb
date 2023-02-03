@@ -9,8 +9,22 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def admin_page
     @bookings = Booking.includes(:user, :pet).all
+    @users=[]
+    @bookings.each do |booking|
+      user = {
+        id: booking.user.id,
+        name: booking.user.name,
+        bookings: []
+      }
+      pet = {
+        name: booking.pet.name,
+        image_url: booking.pet.image_url,
+      }
+      user[:bookings] << pet
+      @users << user unless @users.any? { |u| u[:id] == user[:id] }
+    end
+    render json: @users
   end
-
 
   def login
     code = params[:code]

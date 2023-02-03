@@ -10,7 +10,6 @@ class Api::V1::BookingsController < Api::V1::BaseController
     @booking.user = @current_user
     if @booking.save
       render json: {booking: @booking, pet: @booking.pet}, status: :created
-      # send back: 0. bookng complete info 1.user id 2. pet complete info
     else
       @ori_booking = Booking.find_by(pet: @booking.pet, user:@booking.user)
       render_error
@@ -20,7 +19,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:user, :pet, :credted_at)
+    params.require(:booking).permit(:user, :pet, :created_at)
   end
 
   def render_error

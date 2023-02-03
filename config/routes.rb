@@ -9,13 +9,11 @@ Rails.application.routes.draw do
         member do
           post 'upload'
         end
-        resources :bookings, only: [:create]
+        resources :bookings, only: [:create, :show]
       end
       post 'login', to: 'users#login', as: :login
       get 'users/:id', to: 'users#profile_page'
-      get 'admins/:id', to: 'admins#profile_page'
-      resources :bookings, only: [:show]
-      # get "about", to: "pages#about", as: 'newprefix'
+      get 'admin', to: 'users#admin_page'
     end
 
   end
