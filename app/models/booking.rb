@@ -16,7 +16,7 @@ class Booking < ApplicationRecord
 
   def unique_pet_booking
     if Booking.exists?(user: user, pet: pet)
-      errors.add(:pet, "can't be requested twice, please wait for the admin to contact")
+      errors.add(:pet, "can't be requested twice")
     end
   end
 

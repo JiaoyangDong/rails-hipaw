@@ -9,19 +9,24 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def admin_page
     @bookings = Booking.includes(:user, :pet).all
+    puts "admin_page"
     @users=[]
     @bookings.each do |booking|
-      user = {
-        id: booking.user.id,
-        name: booking.user.name,
-        bookings: []
-      }
+      user = @users.find { |u| u[:id] == booking.user.id }
+      if user.nil?
+        user = {
+          id: booking.user.id,
+          # name: booking.user.name,
+          booked_pets: []
+        }
+        @users << user
+      end
       pet = {
         name: booking.pet.name,
         image_url: booking.pet.image_url,
+        id: booking.pet.id,
       }
-      user[:bookings] << pet
-      @users << user unless @users.any? { |u| u[:id] == user[:id] }
+      user[:booked_pets] << pet
     end
     render json: @users
   end
