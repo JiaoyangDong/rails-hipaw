@@ -3,6 +3,7 @@ class Api::V1::BaseController < ActionController::Base
 
   skip_before_action :verify_authenticity_token
   before_action :verify_request
+  include Api::V1::UsersHelper
 
   rescue_from JWT::ExpiredSignature, with: :render_unauthorized
 
