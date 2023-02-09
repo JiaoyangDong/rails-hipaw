@@ -86,3 +86,5 @@ gem 'open-uri'
 gem "activestorage-aliyun"
 
 gem "dotenv-rails", groups: [:development, :test]
+
+gem 'image_processing'
