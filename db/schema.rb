@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_02_051150) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_075409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,11 +72,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_051150) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "wechat_info"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "open_id"
-    t.string "role"
+    t.boolean "admin"
+    t.string "image"
+    t.string "wechat_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
