@@ -3,9 +3,9 @@ class Api::V1::UsersController < Api::V1::BaseController
   before_action :verify_admin, only: [:admin_page]
 
   def profile_page
-    # @current_user
-    @my_pets = @current_user.pets
-    @booked_pets = @current_user.booked_pets
+    current_user = @current_user
+    @bookings = current_user.bookings
+    @booked_pets = @bookings.map(&:pet)
   end
 
   def admin_page
