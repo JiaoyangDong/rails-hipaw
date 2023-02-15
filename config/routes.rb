@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         member do
           post 'upload'
         end
-        resources :bookings, only: [:create, :show]
+        resources :bookings, only: [:create, :show, :destroy]
       end
       post 'login', to: 'users#login', as: :login
       get 'users/:id', to: 'users#profile_page'
