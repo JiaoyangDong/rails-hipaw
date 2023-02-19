@@ -1,10 +1,11 @@
 class Api::V1::UsersController < Api::V1::BaseController
   skip_before_action :verify_request, only: [:login]
+  before_action :verify_admin, only: [:admin_page]
 
   def profile_page
-    # @current_user
-    @my_pets = @current_user.pets
-    @booked_pets = @current_user.booked_pets
+    current_user = @current_user
+    @bookings = current_user.bookings
+    @booked_pets = @bookings.map(&:pet)
   end
 
   def admin_page
@@ -16,7 +17,9 @@ class Api::V1::UsersController < Api::V1::BaseController
       if user.nil?
         user = {
           id: booking.user.id,
-          # name: booking.user.name,
+          name: booking.user.name,
+          image: booking.user.image,
+          wechat_id: booking.user.wechat_id,
           booked_pets: []
         }
         @users << user
@@ -46,6 +49,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     payload = {user_id: user.id}
     token = jwt_encode(payload)
+  
     # 4.2 - Render the response for the front-end
     render json: {
       headers: { "X-USER-TOKEN" => token },
@@ -59,4 +63,11 @@ class Api::V1::UsersController < Api::V1::BaseController
     payload[:exp] = 7.days.from_now.to_i # set expiration date to 7 days from now
     JWT.encode payload, HMAC_SECRET, 'HS256'
   end
+
+  def verify_admin
+    if @current_user.admin == false or nil?
+      render json: {error: "You are not admin"}, status: :unauthorized
+    end
+  end
+
 end
