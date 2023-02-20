@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         end
         resources :bookings, only: [:create, :show]
       end
+      resources :bookings, only: [:destroy]
       post 'login', to: 'users#login', as: :login
       get 'users/:id', to: 'users#profile_page'
       get 'admin', to: 'users#admin_page'
