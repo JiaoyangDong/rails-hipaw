@@ -54,11 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_075409) do
   create_table "pets", force: :cascade do |t|
     t.string "name"
     t.string "species"
-    t.string "fur_type"
     t.string "age"
     t.string "gender"
     t.string "image_url"
-    t.string "district"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "neutered", default: false
@@ -67,7 +65,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_075409) do
     t.boolean "vaccinated", default: false
     t.boolean "adoptable"
     t.boolean "special_need", default: false
-    t.string "character"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,9 +72,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_075409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "open_id"
-    t.string "role"
-    t.string "image"
+    t.boolean "admin"
     t.string "wechat_id"
+    t.string "image"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

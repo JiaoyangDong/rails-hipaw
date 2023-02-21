@@ -17,7 +17,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
   end
 
   def destroy
-    @booking = Booking.find(params[:id])
+    @booking= Booking.find(params[:id])
     @booking.destroy
     render json: { msg: 'Deleted' }
   end
