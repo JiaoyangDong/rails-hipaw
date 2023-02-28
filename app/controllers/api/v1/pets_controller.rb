@@ -62,8 +62,12 @@ class Api::V1::PetsController < Api::V1::BaseController
   def update
     @pet = Pet.find(params[:id])
     if @pet.update(pet_params)
+      render json: { msg: 'updated!'}
       # render json: @pet
-      render :show
+      # render :show
+      # render_error
+    else
+      p @pet.errors
       render_error
     end
   end
@@ -84,7 +88,7 @@ class Api::V1::PetsController < Api::V1::BaseController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :species, :age, :gender, :neutered, :vaccinated, :adoptable, :special_need, :size, :description)
+    params.require(:pet).permit(:name, :species, :age, :gender, :image_url, :neutered, :vaccinated, :adoptable, :special_need, :size, :description)
   end
 
   def render_error
