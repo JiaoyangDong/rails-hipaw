@@ -25,7 +25,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:user, :pet)
+    params.require(:booking).permit(:user, :pet, :name, :wechat_id, :image, :created_at)
   end
 
   def render_error
