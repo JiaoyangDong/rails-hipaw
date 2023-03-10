@@ -1,7 +1,7 @@
 class Api::V1::FaqsController < Api::V1::BaseController
     def index
       @faqs = Faq.all
-      render json: @faqs
+    #   render json: @faqs
     end
 
     def create
@@ -12,10 +12,16 @@ class Api::V1::FaqsController < Api::V1::BaseController
         render_error
       end
     end
-    
+
     def destroy
     @faq= Faq.find(params[:id])
     @faq.destroy
     render json: { msg: 'Deleted' }
+    end
+
+    private
+
+    def faq_params
+        params.require(:faq).permit(:question, :answer)
     end
   end
