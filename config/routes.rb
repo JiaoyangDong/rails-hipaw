@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       post 'login', to: 'users#login', as: :login
       get 'users/:id', to: 'users#profile_page'
       get 'admin', to: 'users#admin_page'
+      resources :faqs, only: [:index, :create, :destroy]
     end
-
   end
 end
