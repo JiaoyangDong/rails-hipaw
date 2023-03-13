@@ -7,7 +7,7 @@ class Pet < ApplicationRecord
   validates :neutered, inclusion: [true, false]
   validates :vaccinated, inclusion: [true, false]
   validates :special_need, inclusion: [true, false]
-  validates :description, length: { maximum: 300 }
+  validates :description, length: { maximum: 540 }
   validates :adoptable, inclusion: [true, false]
 
   has_many :bookings, dependent: :destroy
